@@ -1,0 +1,28 @@
+{
+  "name": "trivia-quiz",
+  "version": "1.0.0",
+  "description": "A basic Trivia quiz application",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n9iels/trivia-quiz.git"
+  },
+  "author": "Niels van der Veer <n9iels@users.noreply.github.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/n9iels/trivia-quiz/issues"
+  },
+  "homepage": "https://github.com/n9iels/trivia-quiz#readme",
+  "scripts": {
+    "serve": "http-server -c-1",
+    "build": "postcss src/style.css -o public/css/style.min.css"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "cssnano": "^5.1.14",
+    "http-server": "^14.1.1",
+    "postcss": "^8.4.21",
+    "postcss-cli": "^10.1.0",
+    "postcss-normalize": "^10.0.1",
+    "prettier": "^2.8.2"
+  }
+}

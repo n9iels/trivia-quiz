@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Trivia Quiz</title>
+
+    <link rel="preconnect" href="https://opentdb.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="/css/style.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&family=Roboto:wght@300;700&display=swap"
+    />
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </head>
+  <body>
+    <main x-data="{ currentQuestion: 1, questions: [] }" x-init="questions = await fetchQuestions()">
+      <section class="container container--center">
+        <div>
+          <h1>Test your knowledge!</h1>
+          <p>
+            The 10 questions below are randomly selected by
+            <a href="https://opentdb.com/" target="_blank">Open Trivia DB.</a> Need new questions? Just reload the page
+            and start over again!
+          </p>
+          <template x-if="questions.length === 0">
+            <div class="spinner"></div>
+          </template>
+        </div>
+      </section>
+
+      <section class="container">
+        <div class="quiz">
+          <template x-if="questions.length > 0">
+            <aside class="sidebar">
+              <div class="progress">
+                <span class="progress__current" x-text="currentQuestion">1</span>
+                <span class="progress__hr"></span>
+                <span class="progress__total">10</span>
+              </div>
+            </aside>
+          </template>
+
+          <!-- Loop over all questions -->
+          <div class="questions">
+            <template x-for="question, questionIndex in questions">
+              <div class="question" :class="answered && 'question--answered'" x-data="{ answered: false }">
+                <div class="question__title">Question <span x-text="questionIndex + 1"></span></div>
+                <p class="question__body" x-html="question.question"></p>
+                <div class="question__answers">
+                  <form>
+                    <!-- Loop over all answers -->
+                    <template x-for="answer in question.answers">
+                      <label
+                        class="answer"
+                        x-data="{ isGivenAnswer: false, isCorrectAnswer: false }"
+                        :class="{
+                          'answer--correct': answered && answer === question.correct_answer,
+                          'answer--incorrect': isGivenAnswer && !isCorrectAnswer,
+                        }"
+                      >
+                        <input
+                          type="radio"
+                          :name="questionIndex"
+                          :value="answer"
+                          :disabled="answered"
+                          @click="() => {
+                            answered = true;
+                            isGivenAnswer = true;
+                            isCorrectAnswer = answer === question.correct_answer;
+                            currentQuestion++;
+                          }"
+                        />
+                        <span x-html="answer"></span>
+                      </label>
+                    </template>
+                  </form>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+      </section>
+
+      <section></section>
+
+      <footer class="footer">
+        <div class="container">
+          <span>
+            &copy; Niels van der Veer, code licensed under
+            <a href="https://github.com/n9iels/trivia-quiz/blob/master/LICENSE.txt">ISC</a>.
+          </span>
+
+          <a
+            class="github-button"
+            href="https://github.com/n9iels/trivia-quiz"
+            data-size="large"
+            aria-label="Star n9iels/trivia-quiz on GitHub"
+          >
+            &nbsp;Find code on GitHub
+          </a>
+        </div>
+      </footer>
+    </main>
+
+    <script>
+      function fetchQuestions() {
+        return fetch("https://opentdb.com/api.php?amount=10&category=9&type=multiple")
+          .then((res) => res.json())
+          .then((res) => res.results)
+          .then((questions) =>
+            questions.map((question) => {
+              const randomIndex = Math.floor(Math.random() * question.incorrect_answers.length);
+              question.answers = question.incorrect_answers;
+              question.answers.splice(randomIndex, 0, question.correct_answer);
+              return question;
+            })
+          );
+      }
+    </script>
+    `
+  </body>
+</html>
