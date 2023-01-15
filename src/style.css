@@ -1,4 +1,9 @@
-@import-normalize;
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 :root {
   --background: #f7f7f7;
@@ -37,7 +42,7 @@ p {
   content: "";
   position: absolute;
   top: 0;
-  left: 23.5px;
+  left: 23px;
   width: 3px;
   height: 100%;
   background-color: var(--gray);
@@ -127,8 +132,8 @@ p {
   content: "";
   position: absolute;
   left: -66px;
-  height: 16px;
-  width: 16px;
+  height: 21px;
+  width: 21px;
   background-color: var(--white);
   border-radius: 50%;
   border: 3px solid var(--gray);
