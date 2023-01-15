@@ -1,3 +1,7 @@
 {
-  "recommendations": ["csstools.postcss", "esbenp.prettier-vscode"]
+  "recommendations": [
+    "csstools.postcss",
+    "esbenp.prettier-vscode",
+    "adrianwilczynski.alpine-js-intellisense"
+  ]
 }

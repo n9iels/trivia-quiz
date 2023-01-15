@@ -1,6 +1,6 @@
-# trivia-quiz
+# Trivia Quiz
 
-A basic trivia quiz build with Alpine.js
+A basic trivia game build with Alpine.js.
 
 ## Local setup
 
@@ -31,3 +31,5 @@ A basic trivia quiz build with Alpine.js
 ## Making changes
 
 The HTML of the quiz is located in `public/index.html`. Changes can be made directly in this file without additional step needed. The CSS of the quiz is located at `src/style.css`. This file can be edited, but in order to make the changes to the project you must run the command `npm run build`. This will generate the `public/css/style.min.css`. You can add `-- --watch` to the command to keep it running.
+
+What IDE you use is entirely your decisions. If this IDE happends to be [Visual Studio Code](https://code.visualstudio.com/) a pop-up with extension recommendations will be shown after opening this project.
