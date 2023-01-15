@@ -19,7 +19,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </head>
   <body>
-    <main x-data="{ currentQuestion: 1, questions: [] }" x-init="questions = await fetchQuestions()">
+    <main x-data="{ currentQuestion: 0, questions: [] }" x-init="questions = await fetchQuestions()">
       <section class="container container--center">
         <div>
           <h1>Test your knowledge!</h1>
@@ -39,9 +39,9 @@
           <template x-if="questions.length > 0">
             <aside class="sidebar">
               <div class="progress">
-                <span class="progress__current" x-text="currentQuestion">1</span>
+                <span class="progress__current" x-text="currentQuestion"></span>
                 <span class="progress__hr"></span>
-                <span class="progress__total">10</span>
+                <span class="progress__total" x-text="questions.length"></span>
               </div>
             </aside>
           </template>
@@ -110,7 +110,7 @@
 
     <script>
       function fetchQuestions() {
-        return fetch("https://opentdb.com/api.php?amount=10&category=9&type=multiple")
+        return fetch("https://opentdb.com/api.php?amount=10&category=18&type=multiple")
           .then((res) => res.json())
           .then((res) => res.results)
           .then((questions) =>
@@ -123,6 +123,5 @@
           );
       }
     </script>
-    `
   </body>
 </html>
